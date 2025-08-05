@@ -33,6 +33,10 @@ function decimalParaOctal() {
   passos.innerHTML = "<strong>Passos da conversão Decimal → Octal:</strong><br>" +
     etapas.join("<br>");
 }
+
+
+
+
 function octalParaDecimal() {
   let decimalInput = document.getElementById("decimal");
   let octalInput = document.getElementById("octal");
