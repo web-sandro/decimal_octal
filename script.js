@@ -1,18 +1,25 @@
-function decimalParaOctal() {
-  let decimalInput = document.getElementById("decimal");
+function binarioParaOctal() {
+  let binarioInput = document.getElementById("binario");
   let octalInput = document.getElementById("octal");
   let resultado = document.getElementById("resultado");
   let passos = document.getElementById("passos");
 
+<<<<<<< HEAD
   // aceita vírgula ou ponto
   let raw = decimalInput.value.trim().replace(",", ".");
   if (raw === "" || isNaN(raw)) {
+=======
+  let binario = binarioInput.value.trim();
+
+  if (binario === "" || !/^[01.]+$/.test(binario) || (binario.split('.').length > 2)) {
+>>>>>>> 41ec47135cd0309cde6750404f89560a675a0345
     octalInput.value = "";
-    resultado.innerHTML = "Digite um valor decimal válido.";
+    resultado.innerHTML = "Digite um valor binário válido (0, 1 e no máximo um ponto).";
     passos.innerHTML = "";
     return;
   }
 
+<<<<<<< HEAD
   let decimal = parseFloat(raw);
   let inteiro = Math.floor(decimal);
   let fracao = decimal - inteiro;
@@ -50,35 +57,108 @@ function decimalParaOctal() {
   octalInput.value = octal;
   resultado.innerHTML = `Decimal: <strong>( ${raw.replace(".", ",")} )₁₀</strong> → Octal: <strong>( ${octal.replace(".", ",")} )₈</strong>`;
   etapas.push(`<br><strong>Resultado final: ( ${raw.replace(".", ",")} )₁₀ → ( ${octal.replace(".", ",")} )₈</strong>`);
+=======
+  let [parteInteira, parteFracionaria] = binario.split(".");
+  parteFracionaria = parteFracionaria || "";
 
-  passos.innerHTML = "<strong>Passos da conversão Decimal → Octal:</strong><br>" +
-    etapas.join("<br>");
+  let etapas = [];
+
+  // ----- Parte inteira -----
+  while (parteInteira.length % 3 !== 0) {
+    parteInteira = "0" + parteInteira;
+  }
+  etapas.push(`Parte inteira ajustada: ${parteInteira}`);
+
+  let octInt = "";
+  for (let i = 0; i < parteInteira.length; i += 3) {
+    let grupo = parteInteira.substr(i, 3);
+    let valorDecimal = parseInt(grupo, 2);
+    etapas.push(`${grupo} → ${valorDecimal}`);
+    octInt += valorDecimal;
+  }
+
+  // Remover zeros à esquerda
+  octInt = octInt.replace(/^0+/, "") || "0";
+
+  // ----- Parte fracionária -----
+  let octFrac = "";
+  if (parteFracionaria.length > 0) {
+    while (parteFracionaria.length % 3 !== 0) {
+      parteFracionaria = parteFracionaria + "0";
+    }
+    etapas.push(`Parte fracionária ajustada: ${parteFracionaria}`);
+>>>>>>> 41ec47135cd0309cde6750404f89560a675a0345
+
+    for (let i = 0; i < parteFracionaria.length; i += 3) {
+      let grupo = parteFracionaria.substr(i, 3);
+      let valorDecimal = parseInt(grupo, 2);
+      etapas.push(`${grupo} → ${valorDecimal}`);
+      octFrac += valorDecimal;
+    }
+    // remover zeros inúteis do final
+    octFrac = octFrac.replace(/0+$/, "");
+  }
+
+  let resultadoFinal = octInt + (octFrac ? "." + octFrac : "");
+  octalInput.value = resultadoFinal;
+
+  resultado.innerHTML = `Binário: <strong>( ${binario} )₂</strong> → Octal: <strong>( ${resultadoFinal} )₈</strong>`;
+  passos.innerHTML = "<strong>Passos da conversão Binário → Octal:</strong><br>" + etapas.join("<br>");
 }
 
+<<<<<<< HEAD
 
 
 function octalParaDecimal() {
   let decimalInput = document.getElementById("decimal");
+=======
+function octalParaBinario() {
+  let binarioInput = document.getElementById("binario");
+>>>>>>> 41ec47135cd0309cde6750404f89560a675a0345
   let octalInput = document.getElementById("octal");
   let resultado = document.getElementById("resultado");
   let passos = document.getElementById("passos");
 
+<<<<<<< HEAD
   // aceita vírgula ou ponto
   let raw = octalInput.value.trim();
   if (raw === "" || !/^[0-7]+([.,][0-7]*)?$/.test(raw)) {
     decimalInput.value = "";
     resultado.innerHTML = "Digite um valor octal válido (0–7, opcionalmente com ponto ou vírgula).";
+=======
+  let octal = octalInput.value.trim();
+
+  if (octal === "" || !/^[0-7.]+$/.test(octal) || (octal.split('.').length > 2)) {
+    binarioInput.value = "";
+    resultado.innerHTML = "Digite um valor octal válido (0-7 e no máximo um ponto).";
+>>>>>>> 41ec47135cd0309cde6750404f89560a675a0345
     passos.innerHTML = "";
     return;
   }
 
+<<<<<<< HEAD
   // normaliza vírgula → ponto
   let octal = raw.replace(",", ".");
   let [parteInteira, parteFracionaria = ""] = octal.split(".");
 
   let decimal = 0;
-  let etapas = [];
+=======
+  let [parteInteira, parteFracionaria] = octal.split(".");
+  parteFracionaria = parteFracionaria || "";
 
+>>>>>>> 41ec47135cd0309cde6750404f89560a675a0345
+  let etapas = [];
+  let binInt = "";
+  for (let i = 0; i < parteInteira.length; i++) {
+    let digito = parteInteira[i];
+    let grupoBin = parseInt(digito, 8).toString(2).padStart(3, '0');
+    etapas.push(`${digito} (octal) → ${grupoBin} (binário)`);
+    binInt += grupoBin;
+  }
+  // remover zeros à esquerda
+  binInt = binInt.replace(/^0+/, "") || "0";
+
+<<<<<<< HEAD
   // Parte inteira
   parteInteira.split("").reverse().forEach((digito, i) => {
     let valor = parseInt(digito, 10);
@@ -101,4 +181,21 @@ function octalParaDecimal() {
 
   passos.innerHTML = "<strong>Passos da conversão Octal → Decimal:</strong><br>" +
     etapas.join("<br>");
+=======
+  let binFrac = "";
+  for (let i = 0; i < parteFracionaria.length; i++) {
+    let digito = parteFracionaria[i];
+    let grupoBin = parseInt(digito, 8).toString(2).padStart(3, '0');
+    etapas.push(`${digito} (octal) → ${grupoBin} (binário)`);
+    binFrac += grupoBin;
+  }
+  // remover zeros inúteis do final
+  binFrac = binFrac.replace(/0+$/, "");
+
+  let resultadoFinal = binInt + (binFrac ? "." + binFrac : "");
+  binarioInput.value = resultadoFinal;
+
+  resultado.innerHTML = `Octal: <strong>( ${octal} )₈</strong> → Binário: <strong>( ${resultadoFinal} )₂</strong>`;
+  passos.innerHTML = "<strong>Passos da conversão Octal → Binário:</strong><br>" + etapas.join("<br>");
+>>>>>>> 41ec47135cd0309cde6750404f89560a675a0345
 }
