@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conversor Binário ↔ octal</title>
+    <title>Conversor Decimal ↔ Octal</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -12,23 +12,17 @@
     <div class="container">
         <header>
             <h1>litoralnortesoftware.co.br</h1>
-            <h2>Binário ↔ octal</h2>
-            <h2>octal ↔ Binário</h2>
+            <h2>Decimal ↔ Octal</h2>
+            <h2>Octal ↔ Decimal</h2>
         </header>
         <main>
-            <label for="binario">Número Binário:</label>
-            <input type="text" id="binario" oninput="binarioParaOctal()">
+            <label for="decimal">Número Decimal:</label>
+            <input type="number" id="decimal" placeholder="Ex: 255" oninput="decimalParaOctal()">
 
             <label for="octal">Número Octal:</label>
-            <input type="text" id="octal" oninput="octalParaBinario()">
-
+            <input type="text" id="octal" placeholder="Ex: 377" oninput="octalParaDecimal()">
             <div class="resultado" id="resultado">Digite um valor em qualquer campo...</div>
-
             <div class="passos" id="passos"></div>
-
-            <div id="resultado"></div>
-            <div id="passos"></div>
-
             <script src="script.js"></script>
         </main>
         <footer>
@@ -42,7 +36,6 @@
                                 <a href="https://wa.me/5512991485333" target="_blank">
                                     <img src="img/whats.gif" class="f">
                                 </a>
-                                </li>
                                 <li>Email: litoralnortesoftware@hotmail.com</li>
                                 <li>Gmail: litoralnortesoftware@gmail.com</li>
                             </ul>
